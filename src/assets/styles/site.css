@@ -1,0 +1,28 @@
+.left {
+  float: left;
+  margin-left: 2%;
+  font-size: 1.5em;
+}
+
+.right {
+  float: right;
+  margin-right: 2%;
+}
+
+.navigator {
+    margin-top: 20%;
+}
+
+.container {
+  margin: 0;
+  position: absolute;
+  top: 57%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.input.form {
+  width: 50%;
+  margin: 24px auto;
+}
