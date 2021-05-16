@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { insert, update, read } from "../services/apiService";
+import { insert, update, read, remove } from "../services/apiService";
 
 const Course = ({ match, history }) => {
   const [id] = useState(match.params.id);
@@ -20,7 +20,7 @@ const Course = ({ match, history }) => {
   function changeHandler(e) {
     setCourse({
       ...course,
-      [e.target.name]: [e.target.value],
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -30,23 +30,30 @@ const Course = ({ match, history }) => {
 
   const save = () => {
     if (id === "0") {
+      course._id = undefined;
       insert("courses", course, (data) => {
         if (data) return history.push("/courses");
         console.log("Error occured during saving data!");
       });
     } else {
-      update("course", id, course, (data) => {
+      update("courses", id, course, (data) => {
         if (data) return history.push("/courses");
         console.log("Error occured during saving data!");
       });
     }
+  };
+
+  const del = () => {
+    remove("courses", id, (data) => {
+      history.push("/courses");
+    });
   };
   return (
     <div className="container">
       <h2>Course</h2>
       <form className="input-form">
         <div style={{ margin: "12px 0" }}>
-          <label htmlFor="name">Course Name</label>
+          <label htmlFor="name">Name </label>
           <input
             type="text"
             name="name"
@@ -55,7 +62,7 @@ const Course = ({ match, history }) => {
           />
         </div>
         <div style={{ margin: "12px 0" }}>
-          <label htmlFor="points">Course Points</label>
+          <label htmlFor="points">Points </label>
           <input
             type="text"
             name="points"
@@ -64,15 +71,19 @@ const Course = ({ match, history }) => {
           />
         </div>
         <hr />
-        <div className="left">
-          <button type="button">DELETE</button>
-        </div>
+        {id !== "0" && (
+          <div className="left">
+            <button type="button" onClick={del}>
+              DELETE
+            </button>
+          </div>
+        )}
         <div className="right">
           <button type="button" onClick={back}>
             BACK
           </button>
           &nbsp;&nbsp;
-          <button type="button" onClick={save}>
+          <button disabled={!course.name || !course.points} type="button" onClick={save}>
             SAVE
           </button>
         </div>

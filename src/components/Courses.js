@@ -1,4 +1,4 @@
-import { list, insert, update } from "../services/apiService";
+import { list } from "../services/apiService";
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ const Courses = () => {
       <table>
         <thead>
           <tr>
-            <th>Course name</th>
+            <th>Name</th>
             <th>Points</th>
             <th><Link to='/courses/0'>Add New</Link></th>
           </tr>

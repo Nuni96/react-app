@@ -50,7 +50,7 @@ const update = (path, id, data, callback) => {
 
 const remove = (path, id, callback) => {
   axios
-    .get(`${apiUrl}/${path}/${id}`, { headers })
+    .delete(`${apiUrl}/${path}/${id}`, { headers })
     .then((response) => callback(response.data))
     .catch((reason) => {
       console.log(reason);
