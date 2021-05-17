@@ -109,7 +109,7 @@ const Student = ({ match, history }) => {
             BACK
           </button>
           &nbsp;&nbsp;
-          <button disabled={!student.firstName || !student.lastName} type="submit" onClick={save}>
+          <button disabled={!student.firstName || !student.lastName} type="button" onClick={save}>
             SAVE
           </button>
         </div>
